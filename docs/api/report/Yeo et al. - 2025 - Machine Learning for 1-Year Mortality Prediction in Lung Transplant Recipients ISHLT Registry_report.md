@@ -1,0 +1,99 @@
+# Data Extraction Report: Yeo et al. - 2025 - Machine Learning for 1-Year Mortality Prediction in Lung Transplant Recipients ISHLT Registry
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult lung transplant recipients using non‑linear AI models (GBM, MLP) to predict 1‑year survival, includes relevant outcomes, and is a peer‑reviewed article published after 2018.
+
+## Identification & Methods
+- **Sponsorship source**: Institute of Information and Communications Technology Planning and Evaluation (IITP) grant IITP-2025-RS-2023-00254177 and Korean ARPA-H project (KHIDI) grant RS-2024-00512375
+- **Country**: Republic of Korea
+- **Setting**: Multi‑center international registry (ISHLT) with external validation at a single Korean hospital
+- **Comments**: Retrospective study using the ISHLT registry (2009‑2018) and an in‑house dataset (2012‑2024); ethics approval obtained, consent waived
+- **Author_name**: Hye Ju Yeo
+- **Institution**: Transplant Research Center, Pusan National University Yangsan Hospital; Department of Internal Medicine, Pusan National University; Department of Information Convergence Engineering, Pusan National University
+- **Email**: sy.kwon@pusan.ac.kr; popeyes0212@hanmail.net
+- **Address**: Yangsan, Republic of Korea
+- **Country of Data Origin**: International (ISHLT registry) and South Korea (PNUYH dataset)
+- **Dataset Source**: ISHLT International Thoracic Organ Transplant Registry and Pusan National University Yangsan Hospital in‑house dataset
+- **Organ Focus**: Lung
+- **Study Period End**: 2024
+- **Study Period Start**: 2009
+- **Identification Notes**: Included adult lung transplant recipients from ISHLT registry; excluded patients <18 y, retransplantation, multiple organ transplants, and those with missing follow‑up or data
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: Gradient Boosting Machine (GBM), Multilayer Perceptron (MLP), Logistic Regression, Support Vector Machine, Random Forest, Balanced Random Forest
+- **Class Imbalance**: Class‑weight adjustments applied for LR, RF, SVM, and BRF models
+- **Comparator**: Original 25‑feature model versus refined 10‑feature model; also compared across six ML algorithms
+- **Input Variables**: Pre‑transplant clinical variables (25 initially, top 10 most important after SHAP analysis)
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Variables with >20 % missing removed; patients with any remaining missing data excluded (complete‑case analysis)
+- **Validation Method**: Five‑fold cross‑validation on ISHLT data and external validation using an independent in‑house dataset
+- **Methods Notes**: Feature importance assessed with SHAP values; default model settings without hyper‑parameter tuning; external validation demonstrated generalizability despite dataset differences
+
+## Population Characteristics
+- **Inclusion criteria**: Lung transplant recipients registered in the ISHLT registry from June 2009 to June 2018, age ≥18 years
+- **Exclusion criteria**: Patients <18 years, retransplantation, multi-organ transplants, unavailable follow‑up status or missing data
+- **Sample Size Total**: 29364
+- **Target Population**: Lung transplant recipients
+- **Population Notes**: External validation performed on an in‑house dataset (216 patients) with compositional differences from the ISHLT cohort
+- **Recipient Mean Age**: 53.4
+- **Recipient Mean Age Overall**: 53.4
+- **Recipient Female Sex Pct**: 42
+- **Recipient Female Sex Pct Overall**: 42
+- **Mean BMI**: 24.9
+- **Mean BMI Overall**: 24.9
+- **Diagnosis**: COPD most common (27.9%); other diagnoses include IPF, cystic fibrosis, etc.
+- **Diagnosis Overall**: COPD most common (27.9%)
+- **Diabetes Pct**: 11.2
+- **Diabetes Pct Overall**: 11.2
+- **Pre-transplant Support**: ICU admission 6%, ventilator use 3.5%, ECMO use 2.2%
+- **Pre-transplant Support Overall**: ICU admission 6%, ventilator use 3.5%, ECMO use 2.2%
+- **Mean Creatinine**: 0.8
+- **Mean Creatinine Overall**: 0.8
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Gradient Boosting Machine (GBM)
+- **Intervention Input Data Modality**: Pretransplant clinical variables (tabular data)
+- **Number of Predictors**: 25 initially, refined to top 10 features
+- **Feature Selection Method**: SHAP (Shapley Additive exPlanations) ranking of feature importance
+- **Temporal Handling**: Static baseline pretransplant data
+- **Interventions Notes**: Default model settings, no hyperparameter tuning; class weight adjustments for imbalance in LR, RF, SVM, BRF
+- **Reported outcomes in study**: 1-year mortality prediction (AUC, accuracy, sensitivity, specificity)
+- **Outcomes Notes**: Primary outcome is prediction of 1-year mortality after lung transplantation
+- **Result data Notes**: GBM achieved AUC 0.958, accuracy 0.949 on internal validation; external validation AUC 0.852, accuracy 0.764
+- **Primary Outcome Reported name**: 1-year mortality
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: Lung transplant recipients in ISHLT registry (n=29,364)
+- **Primary Outcome Reporting**: AUC 0.958 (95% CI approx 0.956–0.960)
+- **Primary Outcome Point Estimate**: 0.958
+- **Primary Outcome 95 CI Lower**: 0.956
+- **Primary Outcome 95 CI Upper**: 0.960
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: NR
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: AUC calculated on average across five-fold cross‑validation held‑out test folds
+- **Primary Outcome Timepoints**: 1 year post‑transplant
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: 1 year
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: GBM showed highest performance among six models; streamlined model with 10 features retained identical AUC
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: 0.958
+- **Res_Primary 1Yr Accuracy**: 0.949
+- **Res_Primary 1Yr Sens_Spec**: Sensitivity 0.756, Specificity 0.986
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

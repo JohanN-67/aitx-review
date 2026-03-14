@@ -1,0 +1,99 @@
+# Data Extraction Report: Lipkova et al. - 2022 - Deep learning-enabled assessment of cardiac allograft rejection from endomyocardial biopsies
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Requires Human Review (Rejected by LLM)
+
+## Eligibility
+- **Eligibility Status**: Not Accepted
+- **Eligibility Rationale**: The study uses a deep learning model for biopsy rejection assessment in adult heart transplant recipients, but it does not report post‑transplant survival, waitlist mortality, or other required clinical outcomes.
+
+## Identification & Methods
+- **Sponsorship source**: BWH President’s Fund, NIH (NIGMS R35GM138216), Google Cloud Research Grant, Nvidia GPU Grant
+- **Country**: USA
+- **Setting**: Brigham and Women’s Hospital, Harvard Medical School (tertiary academic center)
+- **Comments**: Retrospective analysis of archival pathology slides from heart transplant patients.
+- **Author_name**: Jana Lipkova
+- **Institution**: Brigham and Women’s Hospital, Harvard Medical School
+- **Email**: faisalmahmood@bwh.harvard.edu
+- **Address**: Boston, MA, USA
+- **Country of Data Origin**: USA
+- **Dataset Source**: Internal US cohort whole-slide images from Brigham and Women’s Hospital
+- **Organ Focus**: Heart
+- **Study Period End**: 2021
+- **Study Period Start**: 2004
+- **Identification Notes**: Included adult endomyocardial biopsies collected 2004‑2021; ACR cases 2007‑2021, AMR cases 2011‑2021, normal cases 2017‑2020; balanced normal and rejection cases.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: Weakly supervised multitask deep learning model with ResNet50 encoder, attention‑based multiple instance learning, three binary classifiers for ACR, AMR, Quilty B lesions and a separate grade classifier.
+- **Class Imbalance**: NR
+- **Comparator**: Human expert pathologists (reader study)
+- **Input Variables**: H&E‑stained whole‑slide images; patient‑level diagnostic labels (rejection presence, subtype, grade, Quilty B lesion).
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: 5‑fold cross‑validation, internal hold‑out test set (20% of US data), external validation on independent Turkish and Swiss cohorts.
+- **Methods Notes**: Used CLAM toolbox for preprocessing, tissue segmentation, patch extraction (256 × 256), ResNet50 feature extraction, attention pooling, cross‑entropy loss with equal task weighting, Adam optimizer (lr 2e‑4), early stopping, dropout 0.25.
+
+## Population Characteristics
+- **Inclusion criteria**: NR
+- **Exclusion criteria**: NR
+- **Sample Size Total**: 2398 patients (US 1690, Turkey 585, Switzerland 123)
+- **Target Population**: Heart transplant recipients undergoing endomyocardial biopsy
+- **Population Notes**: Retrospective analysis of archival pathology slides from three institutions (US, Turkey, Switzerland); patients not directly recruited; IRB approved with waived consent.
+- **Recipient Mean Age**: NR
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: NR
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Cardiac Rejection Assessment Neural Estimator (CRANE), a weakly supervised multitask deep learning model with ResNet50 encoder and attention-based multiple instance learning
+- **Intervention Input Data Modality**: H&E-stained whole-slide images (WSIs) of endomyocardial biopsies
+- **Number of Predictors**: NR
+- **Feature Selection Method**: NR
+- **Temporal Handling**: Static baseline data (single biopsy per patient)
+- **Interventions Notes**: Model trained on patient-level labels using weakly supervised multitask learning to detect overall rejection, acute cellular rejection (ACR), antibody-mediated rejection (AMR), Quilty B lesions and to grade rejection; uses tissue segmentation, patch extraction, ResNet50 feature encoding, attention pooling, and separate classifiers for tasks
+- **Reported outcomes in study**: Overall rejection detection, ACR subtyping, AMR subtyping, Quilty B lesion detection, rejection grade discrimination (low vs high)
+- **Outcomes Notes**: Performance reported as area under the ROC curve (AUC) and accuracy for each task on internal US hold‑out set and external Turkish and Swiss cohorts
+- **Result data Notes**: AUC for overall rejection detection = 0.962 (95% CI 0.943–0.980); ACR detection AUC = 0.958; AMR detection AUC = 0.874; Quilty B lesion detection AUC = 0.939; grade discrimination AUC = 0.833
+- **Primary Outcome Reported name**: Overall rejection detection
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All transplant recipients in the US hold‑out test set (336 patients)
+- **Primary Outcome Reporting**: AUC 0.962 (95% CI 0.943–0.980)
+- **Primary Outcome Point Estimate**: 0.962
+- **Primary Outcome 95 CI Lower**: 0.943
+- **Primary Outcome 95 CI Upper**: 0.980
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 336 patients (995 WSIs)
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: AUC on patient‑level predictions for overall rejection detection on a completely held‑out test cohort
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: High AUC indicates strong screening capability for detecting any rejection in post‑transplant biopsies
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

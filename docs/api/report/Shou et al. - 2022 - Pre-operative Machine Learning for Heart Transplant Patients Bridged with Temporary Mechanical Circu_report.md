@@ -1,0 +1,99 @@
+# Data Extraction Report: Shou et al. - 2022 - Pre-operative Machine Learning for Heart Transplant Patients Bridged with Temporary Mechanical Circu
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult heart transplant recipients using a non‑linear machine learning model (XGBoost) to predict 1‑year post‑transplant mortality, meeting all population, intervention, outcome, and publication criteria.
+
+## Identification & Methods
+- **Sponsorship source**: None (no external funding)
+- **Country**: USA
+- **Setting**: NR
+- **Comments**: Retrospective cohort study using UNOS national registry data.
+- **Author_name**: Benjamin L. Shou
+- **Institution**: Johns Hopkins University School of Medicine, Division of Cardiac Surgery, Heart and Vascular Institute
+- **Email**: bshou1@jhmi.edu
+- **Address**: Baltimore, MD, USA
+- **Country of Data Origin**: USA
+- **Dataset Source**: United Network for Organ Sharing (UNOS) database
+- **Organ Focus**: Heart
+- **Study Period End**: 2017
+- **Study Period Start**: 2009
+- **Identification Notes**: Included adult (≥18) isolated heart transplant recipients supported with temporary mechanical circulatory support at time of transplant; excluded re‑transplant, multi‑organ transplant, and total artificial heart.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: Extreme Gradient Boosting (XGBoost)
+- **Class Imbalance**: Addressed using scale_pos_weight set to 7.8 (ratio of survivors to deaths).
+- **Comparator**: NR
+- **Input Variables**: All pre‑transplant variables available in UNOS (498), with 43 selected for final model.
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Automatically imputed by XGBoost on a case‑by‑case basis.
+- **Validation Method**: 70:30 train:test split with balanced events; bootstrapping (1000 replications) for confidence intervals.
+- **Methods Notes**: Grid search hyperparameter tuning; one‑hot encoding of categorical variables; SHAP used for model interpretability; class imbalance handling as above.
+
+## Population Characteristics
+- **Inclusion criteria**: Adult (≥18 years) isolated heart transplant recipients supported with temporary mechanical circulatory support (tMCS) at time of transplant
+- **Exclusion criteria**: Re‑transplant, multi‑organ transplant, total artificial heart
+- **Sample Size Total**: 1584
+- **Target Population**: Heart transplant recipients bridged with temporary mechanical circulatory support
+- **Population Notes**: 70% of patients used for model development (train), 30% for validation (test)
+- **Recipient Mean Age**: 56
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: 26.0
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: XGBoost
+- **Intervention Input Data Modality**: Pre-transplant clinical variables from UNOS database (tabular)
+- **Number of Predictors**: 43 selected features
+- **Feature Selection Method**: Gain‑based automatic selection from 498 variables
+- **Temporal Handling**: Static pre‑operative (pre‑transplant) data
+- **Interventions Notes**: 70:30 train:test split, grid search hyperparameter tuning, scale_pos_weight for class imbalance, SHAP used for model interpretation
+- **Reported outcomes in study**: 1-year post‑transplant mortality
+- **Outcomes Notes**: Primary outcome only; no secondary outcomes reported
+- **Result data Notes**: Model AUC 0.71 (95% CI 0.62–0.78) on validation cohort; precision‑recall AUCPR 0.357
+- **Primary Outcome Reported name**: 1-year post‑transplant mortality
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All patients bridged with temporary mechanical circulatory support (tMCS) (n=1584)
+- **Primary Outcome Reporting**: AUC 0.71 (95% CI: 0.62–0.78)
+- **Primary Outcome Point Estimate**: 0.71
+- **Primary Outcome 95 CI Lower**: 0.62
+- **Primary Outcome 95 CI Upper**: 0.78
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 317
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: AUC calculated on a held‑out test set (30% of cohort)
+- **Primary Outcome Timepoints**: 1 year post‑transplant
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: 1 year
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Demonstrated good performance for predicting mortality in high‑risk tMCS bridge patients
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: 0.71
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

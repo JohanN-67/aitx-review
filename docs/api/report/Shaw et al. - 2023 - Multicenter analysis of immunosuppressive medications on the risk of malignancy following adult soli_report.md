@@ -1,0 +1,99 @@
+# Data Extraction Report: Shaw et al. - 2023 - Multicenter analysis of immunosuppressive medications on the risk of malignancy following adult soli
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Requires Human Review (Rejected by LLM)
+
+## Eligibility
+- **Eligibility Status**: Not Accepted
+- **Eligibility Rationale**: The study involves adult heart and lung transplant recipients and uses a random forest AI model, but it lacks a comparator against current clinical practice, which is required for inclusion.
+
+## Identification & Methods
+- **Sponsorship source**: NR
+- **Country**: United States
+- **Setting**: Multicenter academic hospitals in the greater Chicago area
+- **Comments**: Retrospective cohort study using EHR data from three academic hospitals (Loyola University Medical Center, Gottlieb Memorial Hospital, MacNeal Hospital) covering 2000‑2021.
+- **Author_name**: Reid Shaw
+- **Institution**: Loyola University Medical Center
+- **Email**: patrick.hagen@lumc.edu
+- **Address**: Maywood, Illinois, United States
+- **Country of Data Origin**: United States
+- **Dataset Source**: Electronic health record from three hospitals
+- **Organ Focus**: All solid organ transplants
+- **Study Period End**: 2021
+- **Study Period Start**: 2000
+- **Identification Notes**: Included adult patients ≥18 years; identified transplants and malignancies via ICD‑9/10 codes.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: Random forest
+- **Class Imbalance**: NR
+- **Comparator**: NR
+- **Input Variables**: Demographics (age, sex, race, ethnicity, zip code), transplant organ type, immunosuppressive medication regimens (type, start/end dates), total number of medications.
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: Bootstrap resampling 10 times stratified by outcome (internal validation).
+- **Methods Notes**: Random forest variable importance; one‑hot encoding and normalization of variables; time‑dependent covariates in Cox proportional hazards models.
+
+## Population Characteristics
+- **Inclusion criteria**: Adult solid organ transplant recipients (age ≥18 years)
+- **Exclusion criteria**: Patients under the age of 18
+- **Sample Size Total**: 5591
+- **Target Population**: Solid organ transplant recipients
+- **Population Notes**: Retrospective multicenter cohort from three academic hospitals in Chicago, United States, EHR data queried 2000-2021
+- **Recipient Mean Age**: NR
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: 39
+- **Recipient Female Sex Pct Overall**: 39
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Random forest
+- **Intervention Input Data Modality**: Electronic health record data including ICD codes, demographics, transplant dates, and immunosuppressive medication records
+- **Number of Predictors**: NR
+- **Feature Selection Method**: Variable importance from random forest (Gini impurity) and Cox multivariate regression
+- **Temporal Handling**: Time-dependent covariates for immunosuppressive medications in Cox proportional hazards models
+- **Interventions Notes**: Retrospective multicenter cohort; immunosuppressive medications treated as time-varying exposures
+- **Reported outcomes in study**: Post‑transplant malignancy incidence, hazard ratios for specific immunosuppressive agents
+- **Outcomes Notes**: Includes overall malignancy, skin cancer, lymphoma, organ‑specific cancers; reported as hazard ratios
+- **Result data Notes**: Random forest used to assess variable importance; Cox regression provided HRs for each medication
+- **Primary Outcome Reported name**: Post‑transplant malignancy (any cancer)
+- **Primary Outcome type**: Time‑to‑event (survival) analysis
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Hazard ratio (HR)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All solid organ transplant recipients in the cohort (n=5,591)
+- **Primary Outcome Reporting**: HR for tacrolimus = 0.59 (95% CI 0.44–0.81, p<0.001); other meds reported similarly
+- **Primary Outcome Point Estimate**: 0.59
+- **Primary Outcome 95 CI Lower**: 0.44
+- **Primary Outcome 95 CI Upper**: 0.81
+- **Primary Outcome p-value**: <0.001
+- **Primary Outcome Test Set Size**: NR
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Hazard ratio from multivariate Cox proportional hazards model
+- **Primary Outcome Timepoints**: Median follow‑up 1,903 days (~5.2 years)
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Risk varies by immunosuppressive agent: sirolimus, azathioprine, cyclosporine increase risk; tacrolimus decreases risk
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

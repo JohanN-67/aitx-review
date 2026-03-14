@@ -1,0 +1,99 @@
+# Data Extraction Report: Ismail-2025-Artificial intelligence-driven aut
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Requires Human Review (Rejected by LLM)
+
+## Eligibility
+- **Eligibility Status**: Not Accepted
+- **Eligibility Rationale**: The study applies deep learning to automate lung size measurements in adult lung transplant recipients but does not assess survival, waitlist mortality, complications, quality of life, or economic outcomes, thus failing the outcome criterion.
+
+## Identification & Methods
+- **Sponsorship source**: National Institutes of Health
+- **Country**: USA
+- **Setting**: Single tertiary academic center (University of Pennsylvania)
+- **Comments**: Pilot study developing an AI system for automated lung size measurements from portable chest radiographs, validated on 50 transplant recipients.
+- **Author_name**: Edward Cantu
+- **Institution**: Perelman School of Medicine, University of Pennsylvania
+- **Email**: edward.cantu@pennmedicine.upenn.edu
+- **Address**: 3400 Spruce St, 6 Silverstein Pavilion, Philadelphia, PA 19104, USA
+- **Country of Data Origin**: USA
+- **Dataset Source**: Portable chest radiographs from lung transplant recipients at University of Pennsylvania; Darwin public CXR dataset for training
+- **Organ Focus**: Lung
+- **Study Period End**: NR
+- **Study Period Start**: NR
+- **Identification Notes**: Included 50 lung transplant recipients; images selected to include technical challenges such as consolidations, effusions, and rotation.
+- **Design**: Pilot retrospective cohort study
+- **AI Model Architecture**: PSPNet segmentation model for lung mask extraction followed by computer‑vision feature point detection
+- **Class Imbalance**: NR
+- **Comparator**: Measurements by two expert radiologists (blinded comparison)
+- **Input Variables**: Portable chest radiographs; derived lung masks; geometric feature points
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: Blinded comparison of AI measurements with radiologist measurements on 50 CXRs; linear regression calibration; Pearson correlation and intraclass correlation coefficients reported
+- **Methods Notes**: Data augmentation (rotation, scaling, translation) and contrast‑limited adaptive histogram equalization applied; model trained on 6500 Darwin CXRs with masks; validation performed on institutional CXR set.
+
+## Population Characteristics
+- **Inclusion criteria**: NR
+- **Exclusion criteria**: NR
+- **Sample Size Total**: 50
+- **Target Population**: Lung transplant recipients
+- **Population Notes**: Pilot study using portable chest radiographs of 50 recipients, including images with technical challenges.
+- **Recipient Mean Age**: 59.4
+- **Recipient Mean Age Overall**: 59.4
+- **Recipient Female Sex Pct**: NR
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: 26.9
+- **Mean BMI Overall**: 26.9
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: PSPNet segmentation model with computer vision postprocessing
+- **Intervention Input Data Modality**: Portable chest radiographs (CXR)
+- **Number of Predictors**: NR
+- **Feature Selection Method**: NR
+- **Temporal Handling**: Static imaging (single time point)
+- **Interventions Notes**: Two-step framework: automatic lung segmentation using PSPNet trained on Darwin dataset with data augmentation, followed by computer‑vision feature point detection to compute six lung size measurements.
+- **Reported outcomes in study**: Average measurement error, Pearson correlation coefficient, intraclass correlation coefficients between AI and radiologists
+- **Outcomes Notes**: Focus on accuracy and agreement of AI‑generated lung size measurements compared with expert radiologist readings.
+- **Result data Notes**: AI achieved <2.5% error (<7 mm), Pearson r=0.97, ICC >0.95 for all measurements.
+- **Primary Outcome Reported name**: Measurement error of AI‑generated lung size metrics
+- **Primary Outcome type**: Continuous accuracy metric
+- **Primary Outcome Reported against**: Average of two radiologist measurements (reference standard)
+- **Primary Outcome Reported as**: Percentage error and Pearson correlation coefficient
+- **Primary Outcome Reference arm**: Radiologist average measurements
+- **Primary Outcome group**: Lung transplant recipients (N=50)
+- **Primary Outcome Reporting**: Average error <2.5% (<7.0 mm), Pearson r=0.97
+- **Primary Outcome Point Estimate**: 2.5%
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 50
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Average absolute error percentage and Pearson correlation between AI measurements and radiologist reference on a held‑out test set
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Demonstrated high agreement with expert radiologists despite challenging image conditions.
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

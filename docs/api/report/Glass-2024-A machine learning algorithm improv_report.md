@@ -1,0 +1,99 @@
+# Data Extraction Report: Glass-2024-A machine learning algorithm improv
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Requires Human Review (Rejected by LLM)
+
+## Eligibility
+- **Eligibility Status**: Not Accepted
+- **Eligibility Rationale**: The study applies a deep learning algorithm to improve histologic diagnosis of antibody‑mediated rejection, but it does not assess transplant survival, waitlist mortality, post‑transplant complications, quality of life, or economic outcomes, which are required outcome criteria.
+
+## Identification & Methods
+- **Sponsorship source**: NR
+- **Country**: USA
+- **Setting**: Tertiary academic center
+- **Comments**: Retrospective study using annotated endomyocardial biopsy slides from Duke University Medical Center to develop and validate a deep learning algorithm for pAMR-H detection.
+- **Author_name**: Carolyn Glass
+- **Institution**: Duke University Medical Center, Division of Artificial Intelligence and Computational Pathology
+- **Email**: carolyn.glass@duke.edu
+- **Address**: 217AM Davison Building, Box 3712, 40 Duke Medicine Circle, Durham NC 27710
+- **Country of Data Origin**: USA
+- **Dataset Source**: 300 H&E stained endomyocardial biopsy slides scanned with Leica Aperio GT450 at Duke
+- **Organ Focus**: Heart
+- **Study Period End**: 2021
+- **Study Period Start**: 2018
+- **Identification Notes**: Biopsies confirmed as pAMR2 with >50% C4d IF positivity and/or >10% CD68 positive intravascular macrophages; 4,212 annotated regions (normal, pAMR-H, healing injury, ACR).
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: ResNet50 convolutional neural network with transfer learning
+- **Class Imbalance**: NR
+- **Comparator**: NR
+- **Input Variables**: Whole slide image patches (224x224 pixels) from H&E stained slides
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: 70% training, 10% validation, 20% testing split; internal hold‑out validation
+- **Methods Notes**: Expert consensus panel of 16 cardiac pathologists defined ground truth; annotations performed in Leica ImageScope; model trained with cross‑entropy loss and Adam optimizer; performance evaluated via accuracy and AUC.
+
+## Population Characteristics
+- **Inclusion criteria**: Endomyocardial biopsy fragments from cardiac transplant patients confirmed with pAMR2 between 2018 and 2021 at Duke University Medical Center
+- **Exclusion criteria**: NR
+- **Sample Size Total**: 300 biopsies (4,212 annotated regions)
+- **Target Population**: Cardiac transplant recipients
+- **Population Notes**: Samples collected from a single center (Duke) with IRB approval; biopsies stored in formalin and paraffin embedded
+- **Recipient Mean Age**: NR
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: NR
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: pAMR2 (pathologic antibody mediated rejection) confirmed by >50% C4d IF or >10% CD68+ intravascular macrophages
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: ResNet50 convolutional neural network with transfer learning
+- **Intervention Input Data Modality**: Whole slide H&E images scanned at 40X magnification
+- **Number of Predictors**: NR
+- **Feature Selection Method**: NR
+- **Temporal Handling**: Static image analysis
+- **Interventions Notes**: Model pretrained on ImageNet, fine‑tuned on annotated patches using cross entropy loss and Adam optimizer
+- **Reported outcomes in study**: Overall validation accuracy, category‑specific accuracies, area under ROC curve (AUC)
+- **Outcomes Notes**: Overall accuracy 98%; pAMR‑H vs normal 99.5%, vs healing injury 99.2%, vs ACR 99.2%; AUC reported as 0.992 for comparisons
+- **Result data Notes**: Algorithm achieved high diagnostic performance, potentially surpassing human pathologist concordance
+- **Primary Outcome Reported name**: Diagnostic accuracy of pAMR‑H detection
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: Human pathologist review (concordance)
+- **Primary Outcome Reported as**: Accuracy percentage and AUC
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All test set image patches
+- **Primary Outcome Reporting**: 98% overall validation accuracy; 99.5% vs normal, 99.2% vs healing injury, 99.2% vs ACR
+- **Primary Outcome Point Estimate**: 0.98
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: NR
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Proportion of correctly classified patches; AUC from ROC analysis on test set
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: High accuracy suggests AI can aid pathologist diagnosis of pAMR‑H
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

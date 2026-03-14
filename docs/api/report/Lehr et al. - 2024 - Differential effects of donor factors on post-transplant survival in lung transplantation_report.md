@@ -1,0 +1,99 @@
+# Data Extraction Report: Lehr et al. - 2024 - Differential effects of donor factors on post-transplant survival in lung transplantation
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult lung transplant recipients and uses a random forest machine learning model (non‑linear AI) to predict post‑transplant survival, meeting population, intervention, outcome, and study design criteria.
+
+## Identification & Methods
+- **Sponsorship source**: National Institutes of Health (NIH) and Cystic Fibrosis Foundation
+- **Country**: USA
+- **Setting**: Analysis of US Scientific Registry of Transplant Recipients (SRTR) data
+- **Comments**: Retrospective registry study evaluating donor factor interactions on post‑transplant survival in adult bilateral lung transplant recipients.
+- **Author_name**: Carli J. Lehr
+- **Institution**: Cleveland Clinic, Department of Pulmonary Medicine
+- **Email**: Lehrc@ccf.org
+- **Address**: 9500 Euclid Ave, Cleveland, OH 44195
+- **Country of Data Origin**: USA
+- **Dataset Source**: Scientific Registry of Transplant Recipients (SRTR)
+- **Organ Focus**: Lung
+- **Study Period End**: 1 February 2020
+- **Study Period Start**: 19 February 2015
+- **Identification Notes**: Included adult primary bilateral lung transplant recipients (n=7,609); excluded single lung transplants.
+- **Design**: Retrospective cohort
+- **AI Model Architecture**: Cox proportional hazards regression, Random Forest
+- **Class Imbalance**: NR
+- **Comparator**: Post‑transplant Composite Allocation Score model (PT‑CAS)
+- **Input Variables**: Recipient age, sex, diagnosis group; donor factors including age, sex, race/ethnicity, smoking history, diabetes, CMV/EBV mismatch, cause of death, ischemic time, etc.
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: 10‑fold cross‑validation (time‑dependent AUC)
+- **Methods Notes**: Univariable and multivariable Cox models with interaction terms; backward elimination for variable reduction; random forest model built for comparison; model performance assessed via AUC, Brier score, calibration plots.
+
+## Population Characteristics
+- **Inclusion criteria**: Adult primary bilateral lung transplant recipients
+- **Exclusion criteria**: Single lung transplants excluded
+- **Sample Size Total**: 7609
+- **Target Population**: Recipients
+- **Population Notes**: Data from US Scientific Registry of Transplant Recipients, adult bilateral lung transplants between 19 Feb 2015 and 1 Feb 2020
+- **Recipient Mean Age**: 59
+- **Recipient Mean Age Overall**: 59
+- **Recipient Female Sex Pct**: 40.0
+- **Recipient Female Sex Pct Overall**: 40.0
+- **Mean BMI**: 25.8
+- **Mean BMI Overall**: 25.8
+- **Diagnosis**: Restrictive lung disease (diagnosis group D)
+- **Diagnosis Overall**: Restrictive lung disease (diagnosis group D)
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: 33
+- **Donor Mean Age Overall**: 33
+- **Ischemic Time**: 335 minutes
+- **Ischemic Time Overall**: 335 minutes
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Cox regression, Random forest
+- **Intervention Input Data Modality**: SRTR registry clinical variables (donor and recipient characteristics)
+- **Number of Predictors**: NR
+- **Feature Selection Method**: Backward elimination based on significance (p<0.05)
+- **Temporal Handling**: Static baseline data with time-dependent AUC evaluation
+- **Interventions Notes**: Four models built: COX, COX+PT-CAS, RF, RF+PT-CAS; compared to PT-CAS using discrimination (AUC) and calibration
+- **Reported outcomes in study**: Post-transplant survival (1-year, 3-year, 5-year), model discrimination (AUC)
+- **Outcomes Notes**: Interactions between donor and recipient factors examined; modest improvement in prediction when adding donor factors
+- **Result data Notes**: COX+PT-CAS model AUC 0.626 at 1 year vs PT-CAS AUC 0.609; similar trends at 3 and 5 years
+- **Primary Outcome Reported name**: 1-year post-transplant survival
+- **Primary Outcome type**: Survival (time-to-event)
+- **Primary Outcome Reported against**: PT-CAS model
+- **Primary Outcome Reported as**: Area under the receiver operating characteristic curve (AUC)
+- **Primary Outcome Reference arm**: PT-CAS AUC 0.609
+- **Primary Outcome group**: All primary bilateral lung transplant recipients (n=7,609)
+- **Primary Outcome Reporting**: AUC 0.626
+- **Primary Outcome Point Estimate**: 0.626
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 7,609
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Time-dependent AUC from 10-fold cross‑validation
+- **Primary Outcome Timepoints**: 1 year (also reported at 3 and 5 years)
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: 1 year
+- **Primary Outcome Late Reported time**: 5 years
+- **Primary Outcome Notes**: Addition of donor factors yielded only modest improvement in discrimination and calibration
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: 0.626
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

@@ -1,0 +1,99 @@
+# Data Extraction Report: Davalos-Yerovi et al. - 2024 - Factors Influencing the Attrition Rate of a 10-Week Multimodal Rehabilitation Program in Patients Af
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study is a prospective observational analysis of adult lung transplant recipients using an artificial neural network (non‑linear AI) to predict attrition (a post‑transplant complication/compliance), meeting all population, intervention, outcome, and study design criteria.
+
+## Identification & Methods
+- **Sponsorship source**: No external funding
+- **Country**: Spain
+- **Setting**: Specialized outpatient clinics within the respiratory rehabilitation unit of a tertiary university hospital in Barcelona, Catalonia, Spain
+- **Comments**: Prospective observational study of first‑time lung transplant recipients undergoing a 10‑week multimodal rehabilitation program; artificial neural network used to identify baseline factors influencing attrition.
+- **Author_name**: Vanesa Dávalos-Yerovi
+- **Institution**: Rehabilitation Research Group, Hospital del Mar Medical Research Institute, Barcelona, Spain
+- **Email**: nataliavanesa.davalos@vallhebron.cat
+- **Address**: 08003 Barcelona, Spain
+- **Country of Data Origin**: Spain
+- **Dataset Source**: Prospective cohort data collected from lung transplant recipients enrolled in the multimodal rehabilitation program at Hospital del Mar / Vall d’Hebron, Barcelona
+- **Organ Focus**: Lung
+- **Study Period End**: September 2023
+- **Study Period Start**: January 2022
+- **Identification Notes**: Included all first‑time lung transplant recipients aged >18 years referred to the outpatient multimodal rehabilitation program.
+- **Design**: Prospective observational study
+- **AI Model Architecture**: Artificial Neural Network (nnet package) with 30 neurons, tanh activation function, decay = 0.001, trained on 23 baseline variables
+- **Class Imbalance**: NR
+- **Comparator**: Regression analysis performed on the same variables for comparison with ANN results
+- **Input Variables**: 23 baseline variables without missing data (e.g., age, sex, BMI, malnutrition screening, sarcopenia measures, lung‑function tests, handgrip strength, HRQoL, comorbidity index, transplant indication, etc.)
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Only variables with complete data (no missing values) were included; participants with missing baseline data were excluded from ANN analysis.
+- **Validation Method**: NR
+- **Methods Notes**: Data were rescaled to [-1, +1]; categorical variables dummy‑encoded; Garson's algorithm used to assess variable importance; model converged after 3250 iterations; no external validation performed.
+
+## Population Characteristics
+- **Inclusion criteria**: First-time lung transplant recipients aged ≥18 years, within 3 months post-discharge, single or bilateral transplant with primary diagnosis of interstitial lung disease, COPD, cystic fibrosis, bronchiectasis or pulmonary vascular disease, able to speak/read Spanish or Catalan
+- **Exclusion criteria**: Pre-existing musculoskeletal disorders, severe post-transplant critical illness neuromyopathy, any other significant disease deemed by investigators to risk participant or affect results
+- **Sample Size Total**: 41
+- **Target Population**: Lung transplant (LT) recipients
+- **Population Notes**: Prospective observational study conducted in a specialized outpatient clinic; participants enrolled in a 10‑week multimodal rehabilitation program
+- **Recipient Mean Age**: 55.8
+- **Recipient Mean Age Overall**: 55.8
+- **Recipient Female Sex Pct**: 46.3
+- **Recipient Female Sex Pct Overall**: 46.3
+- **Mean BMI**: 22.3
+- **Mean BMI Overall**: 22.3
+- **Diagnosis**: COPD most frequent (29.3%)
+- **Diagnosis Overall**: COPD most common overall
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Artificial Neural Network (ANN)
+- **Intervention Input Data Modality**: Baseline clinical variables (23 predictors) from multimodal rehabilitation assessment
+- **Number of Predictors**: 23
+- **Feature Selection Method**: Garson's algorithm relative importance (>0.5) used to select key variables
+- **Temporal Handling**: Static baseline data (single time point before rehabilitation)
+- **Interventions Notes**: ANN implemented with R nnet package (30 neurons, decay 0.001, tanh activation), rescaled inputs, ordinal encoding of attrition levels
+- **Reported outcomes in study**: Attrition rate (high vs low/medium), identification of factors influencing attrition
+- **Outcomes Notes**: Primary outcome is classification of participants into attrition categories based on percentage of missing data
+- **Result data Notes**: ANN used to rank variable importance; regression analysis provided p-values for significant predictors
+- **Primary Outcome Reported name**: Attrition rate (high attrition >10% missing data)
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Proportion of participants with high attrition
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All lung transplant recipients (n=41)
+- **Primary Outcome Reporting**: 17/41 participants had high attrition (41.4%)
+- **Primary Outcome Point Estimate**: 0.414
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 41
+- **Primary Outcome Threshold**: High attrition defined as >10% missing data
+- **Primary Outcome Metric Definition**: Percentage of missing measurements per participant; >10% classified as high attrition
+- **Primary Outcome Timepoints**: During the 10‑week rehabilitation program
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Significant predictors identified: low age‑dependent BMI, end‑stage respiratory disease requiring LT, low HRQoL (EQ‑5D VAS), low handgrip strength
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

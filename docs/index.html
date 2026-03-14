@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Data Viewer</title>
+    <!-- Use Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --sidebar-bg: #1e293b;
+            --sidebar-hover: #334155;
+            --sidebar-text: #f1f5f9;
+            --primary: #3b82f6;
+            --primary-light: #eff6ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #sidebar {
+            width: 320px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #0f172a;
+        }
+        #sidebar-header {
+            padding: 20px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--sidebar-hover);
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        #search-container {
+            padding: 15px;
+            border-bottom: 1px solid var(--sidebar-hover);
+        }
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            background: var(--sidebar-hover);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            outline: none;
+        }
+        #search-input::placeholder {
+            color: #94a3b8;
+        }
+        #article-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .article-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #334155;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            line-height: 1.4;
+            color: #cbd5e1;
+            word-break: break-word;
+        }
+        .article-item:hover {
+            background-color: var(--sidebar-hover);
+            color: white;
+        }
+        .article-item.active {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+            border-left: 4px solid #60a5fa;
+        }
+        #main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #header {
+            min-height: 70px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        #header h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #tabs {
+            display: flex;
+            background: #f1f5f9;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-muted);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab:hover {
+            color: var(--primary);
+        }
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+        }
+        #content-area {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: white;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #334155;
+        }
+        
+        /* Markdown styling */
+        #content-area h1, #content-area h2, #content-area h3 {
+            color: var(--text-main);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        #content-area h1:first-child, #content-area h2:first-child {
+            margin-top: 0;
+        }
+        #content-area strong {
+            color: #1e293b;
+        }
+        #content-area p {
+            margin-bottom: 1em;
+        }
+        #content-area code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #be185d;
+        }
+        #content-area pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5em;
+        }
+        #content-area pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+        }
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .json-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .json-table th, .json-table td {
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .json-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            width: 30%;
+            color: var(--sidebar-bg);
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        #sidebar ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar">
+        <div id="sidebar-header">Systematic Review</div>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="Search articles...">
+        </div>
+        <ul id="article-list">
+            <!-- Populated by JS -->
+        </ul>
+    </div>
+
+    <div id="main-content">
+        <div id="header">
+            <h2 id="current-article-title">Select an article</h2>
+        </div>
+        <div id="tabs" style="display: none;">
+            <div class="tab" onclick="switchTab('summary')" id="tab-summary">Summary</div>
+            <div class="tab" onclick="switchTab('report')" id="tab-report">Report</div>
+            <div class="tab" onclick="switchTab('json')" id="tab-json">Extracted Data</div>
+            <div class="tab" onclick="switchTab('webapp')" id="tab-webapp">Web App Form</div>
+            <div class="tab" onclick="switchTab('qa')" id="tab-qa">Quality Assessment</div>
+        </div>
+        <div id="content-area">
+            <div class="empty-state">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2.5L18.5 9H13V4.5zM6 20V4h5v7h7v9H6z"/></svg>
+                <h3>No article selected</h3>
+                <p>Choose an article from the sidebar to view its details.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let articles = [];
+        let currentArticle = null;
+        let activeTab = 'summary';
+        let articleData = { report: '', summary: '', json: '', qa: '' };
+
+        // Fetch articles on load
+        fetch('api/articles.json')
+            .then(res => res.json())
+            .then(data => {
+                articles = data;
+                renderArticleList(articles);
+            })
+            .catch(err => {
+                console.error("Failed to load articles", err);
+                document.getElementById('article-list').innerHTML = '<li style="padding:15px; color:#ef4444;">Failed to load articles. Run server locally.</li>';
+            });
+
+        function renderArticleList(list) {
+            const ul = document.getElementById('article-list');
+            ul.innerHTML = '';
+            list.forEach(article => {
+                const li = document.createElement('li');
+                li.className = 'article-item';
+                li.textContent = article;
+                if (currentArticle === article) li.classList.add('active');
+                li.onclick = () => selectArticle(article);
+                ul.appendChild(li);
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = articles.filter(a => a.toLowerCase().includes(term));
+            renderArticleList(filtered);
+        });
+
+        async function selectArticle(articleId) {
+            currentArticle = articleId;
+            document.getElementById('current-article-title').textContent = articleId;
+            document.getElementById('tabs').style.display = 'flex';
+            
+            // Render active state in sidebar
+            document.querySelectorAll('.article-item').forEach(el => {
+                el.classList.toggle('active', el.textContent === articleId);
+            });
+
+            // Fetch data
+            document.getElementById('content-area').innerHTML = '<div style="padding: 20px; color: #64748b; font-weight: 500;">Loading data...</div>';
+            
+            try {
+                const [reportRes, summaryRes, jsonRes, qaRes] = await Promise.all([
+                    fetch(`api/report/${encodeURIComponent(articleId)}_report.md`),
+                    fetch(`api/summary/${encodeURIComponent(articleId)}_summary.md`),
+                    fetch(`api/json/${encodeURIComponent(articleId)}.json`),
+                    fetch(`api/qa/${encodeURIComponent(articleId)}.json`)
+                ]);
+
+                articleData.report = reportRes.ok ? await reportRes.text() : '*Report file not found.*';
+                articleData.summary = summaryRes.ok ? await summaryRes.text() : '*Summary file not found.*';
+                
+                let jsonText = '';
+                if (jsonRes.ok) {
+                    try {
+                        const jsonObj = await jsonRes.json();
+                        jsonText = jsonObj;
+                    } catch(e) {
+                        jsonText = { error: "Failed to parse JSON" };
+                    }
+                } else {
+                    jsonText = { error: "JSON file not found" };
+                }
+                articleData.json = jsonText;
+                
+                let qaText = '';
+                if (qaRes.ok) {
+                    try {
+                        const qaObj = await qaRes.json();
+                        qaText = qaObj;
+                    } catch(e) {
+                        qaText = { error: "Failed to parse QA data" };
+                    }
+                } else {
+                    qaText = { error: "QA data not found for this article" };
+                }
+                articleData.qa = qaText;
+
+                renderContent();
+            } catch (err) {
+                document.getElementById('content-area').innerHTML = `<div style="padding: 20px; color: #ef4444;">Error loading article details. Make sure server is running.</div>`;
+            }
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            renderContent();
+        }
+
+        function renderContent() {
+            const container = document.getElementById('content-area');
+            if (!currentArticle) return;
+            
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${activeTab}`).classList.add('active');
+
+            if (activeTab === 'report') {
+                container.innerHTML = marked.parse(articleData.report);
+            } else if (activeTab === 'summary') {
+                container.innerHTML = marked.parse(articleData.summary);
+            } else if (activeTab === 'webapp') {
+                if (articleData.json.error) {
+                    container.innerHTML = `<em>${articleData.json.error}</em>`;
+                } else {
+                    const d = articleData.json;
+                    const id = d.identification_methods || {};
+                    const pop = d.population || {};
+                    const intOut = d.interventions_outcomes || {};
+
+                    // Helper to gracefully get values
+                    const getVal = (obj, key, fallback="NR") => obj[key] ? obj[key] : fallback;
+
+                    let html = `<div style="max-width: 800px; margin: 0 auto;">`;
+                    
+                    // Section 1
+                    html += `<h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; color: #1e293b;">Section 1: Study Identification & Metadata</h3>`;
+                    html += `<table class="json-table"><tbody>`;
+                    html += `<tr><th>Study Title</th><td>${getVal(d, 'study_id')}</td></tr>`;
+                    html += `<tr><th>Country of Data Origin</th><td>${getVal(id, 'Country of Data Origin', getVal(id, 'Country'))}</td></tr>`;
+                    html += `<tr><th>Organ Focus</th><td>${getVal(id, 'Organ Focus')}</td></tr>`;
+                    html += `<tr><th>Dataset Source</th><td>${getVal(id, 'Dataset Source')}</td></tr>`;
+                    html += `<tr><th>Study Period Start (Year)</th><td>${getVal(id, 'Study Period Start')}</td></tr>`;
+                    html += `<tr><th>Study Period End (Year)</th><td>${getVal(id, 'Study Period End')}</td></tr>`;
+                    html += `</tbody></table>`;
+
+                    // Section 2
+                    html += `<h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 30px; color: #1e293b;">Section 2: Population (PICO - P)</h3>`;
+                    html += `<table class="json-table"><tbody>`;
+                    html += `<tr><th>Target Population</th><td>${getVal(pop, 'Target Population')}</td></tr>`;
+                    html += `<tr><th>Total Sample Size (N)</th><td>${getVal(pop, 'Sample Size Total')}</td></tr>`;
+                    html += `<tr><th>Overall Mean Age</th><td>${getVal(pop, 'Recipient Mean Age Overall')}</td></tr>`;
+                    html += `<tr><th>Female Sex (%)</th><td>${getVal(pop, 'Recipient Female Sex Pct Overall')}</td></tr>`;
+                    html += `</tbody></table>`;
+
+                    // Section 3
+                    html += `<h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 30px; color: #1e293b;">Section 3: Intervention & AI Methods</h3>`;
+                    html += `<table class="json-table"><tbody>`;
+                    html += `<tr><th>Primary ML Component</th><td>${getVal(id, 'ML Primary Component')}</td></tr>`;
+                    html += `<tr><th>Study Design</th><td>${getVal(id, 'Design')}</td></tr>`;
+                    html += `<tr><th>AI Model Architecture</th><td>${getVal(id, 'AI Model Architecture')}</td></tr>`;
+                    html += `<tr><th>Algorithm Name</th><td>${getVal(intOut, 'Specific Algorithm Name')}</td></tr>`;
+                    html += `<tr><th>Input Variables (Data Modality)</th><td>${getVal(id, 'Input Variables')}</td></tr>`;
+                    html += `<tr><th>Comparator / Standard of Care</th><td>${getVal(id, 'Comparator')}</td></tr>`;
+                    html += `<tr><th>Validation Method</th><td>${getVal(id, 'Validation Method')}</td></tr>`;
+                    html += `</tbody></table>`;
+
+                    // Section 4
+                    html += `<h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 30px; color: #1e293b;">Section 4: AI Quality & Reproducibility</h3>`;
+                    html += `<table class="json-table"><tbody>`;
+                    html += `<tr><th>Missing Data Handling</th><td>${getVal(id, 'Missing Data Handling')}</td></tr>`;
+                    html += `<tr><th>Training Size / Test Size (Notes)</th><td><b>Test Set:</b> ${getVal(intOut, 'Primary Outcome Test Set Size')}<br><i>Check 'Sample Size Total' or notes for training split if not explicitly extracted.</i></td></tr>`;
+                    html += `</tbody></table>`;
+
+                    // Section 5
+                    html += `<h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 30px; color: #1e293b;">Section 5: Outcomes & Performance</h3>`;
+                    html += `<table class="json-table"><tbody>`;
+                    html += `<tr><th>Target Clinical Outcome</th><td>${getVal(intOut, 'Primary Outcome Reported name')}</td></tr>`;
+                    html += `<tr><th>Model AUC / C-Statistic</th><td>${getVal(intOut, 'Primary Outcome Point Estimate')}</td></tr>`;
+                    html += `<tr><th>Model Accuracy (%)</th><td>${getVal(intOut, 'Res_Primary 1Yr Accuracy')}</td></tr>`;
+                    html += `<tr><th>Sensitivity / Specificity (%)</th><td>${getVal(intOut, 'Res_Primary 1Yr Sens_Spec')}</td></tr>`;
+                    html += `</tbody></table>`;
+
+                    html += `</div>`;
+                    container.innerHTML = html;
+                }
+            } else if (activeTab === 'json' || activeTab === 'qa') {
+                const dataToRender = activeTab === 'json' ? articleData.json : articleData.qa;
+                if (dataToRender.error) {
+                    container.innerHTML = `<em>${dataToRender.error}</em>`;
+                } else {
+                    let html = '<table class="json-table"><tbody>';
+                    for (const [key, value] of Object.entries(dataToRender)) {
+                        let displayValue = value;
+                        if (typeof value === 'object') {
+                            displayValue = `<pre style="margin:0; padding:10px; font-size: 0.85em;"><code>${JSON.stringify(value, null, 2)}</code></pre>`;
+                        } else if (Array.isArray(value)) {
+                            displayValue = value.join(', ');
+                        } else if (value === null) {
+                            displayValue = '<em>null</em>';
+                        }
+                        html += `<tr><th>${key}</th><td>${displayValue}</td></tr>`;
+                    }
+                    html += '</tbody></table>';
+                    container.innerHTML = html;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+# Data Extraction Report: McInnis-2022-Chronic lung allograft dysfunctio
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The retrospective cohort of adult lung transplant recipients uses a non‑linear machine learning CT analysis to predict graft survival, meeting population, AI intervention, outcome, and study design criteria.
+
+## Identification & Methods
+- **Sponsorship source**: NR
+- **Country**: Canada
+- **Setting**: Single-centre retrospective study at a tertiary academic transplant centre
+- **Comments**: Retrospective analysis of adult first double lung transplant recipients with chronic lung allograft dysfunction (CLAD) using machine learning CT texture analysis and radiologist scoring.
+- **Author_name**: Micheal C. McInnis
+- **Institution**: University Health Network, University of Toronto
+- **Email**: micheal.mcinnis@uhn.ca
+- **Address**: Toronto, ON, Canada
+- **Country of Data Origin**: Canada
+- **Dataset Source**: NR
+- **Organ Focus**: Lung
+- **Study Period End**: December 2015
+- **Study Period Start**: January 2010
+- **Identification Notes**: Included all adult first double lung transplant patients transplanted between Jan 2010 and Dec 2015 who developed CLAD and had a thin‑section inspiratory CT within 100 days after CLAD onset (or ≤28 days before). Excluded single lung, heart‑lung transplants and re‑transplants.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: CALIPER‑based lung texture analysis tool (Imbio Lung Texture Analysis) performing voxel‑wise classification into normal, hyperlucent, ground‑glass, reticular or honeycomb textures.
+- **Class Imbalance**: NR
+- **Comparator**: Radiologist semi‑quantitative CT scoring system.
+- **Input Variables**: Machine learning outputs: percentages of hyperlucent lung, ground‑glass opacity, reticular texture, pulmonary vessel volume (PVV), total lung capacity (CTTLC). Radiologist scores: consolidation, ground‑glass opacity, reticulation, pleural effusion, air trapping, bronchiectasis.
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: NR
+- **Validation Method**: Internal performance assessment using ROC curve analysis and Cox proportional hazards regression; no separate external validation set.
+- **Methods Notes**: CT scans acquired on Aquilion scanners at Toronto General Hospital; segmentation succeeded in 93% of cases. Statistical analyses performed in R version 4.0.
+
+## Population Characteristics
+- **Inclusion criteria**: All adult first double lung transplant patients transplanted between January 2010 and December 2015 who developed chronic lung allograft dysfunction (CLAD) and had an inspiratory CT near CLAD diagnosis
+- **Exclusion criteria**: Single lung transplants, heart–lung transplants, re‑transplants, patients who died without CLAD, CLAD‑free up to 31 December 2019, non‑CLAD pulmonary function decline, and those without a qualifying CT within the required time window
+- **Sample Size Total**: 88
+- **Target Population**: Lung transplant recipients with chronic lung allograft dysfunction (CLAD)
+- **Population Notes**: Retrospective single‑centre study; CT performed a median of 9.5 days from CLAD onset
+- **Recipient Mean Age**: NR
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: NR
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: CALIPER-based Lung Texture Analysis tool (Imbio)
+- **Intervention Input Data Modality**: Inspiratory thin-section CT images at CLAD onset
+- **Number of Predictors**: NR
+- **Feature Selection Method**: NR
+- **Temporal Handling**: Static baseline CT at CLAD diagnosis
+- **Interventions Notes**: Machine learning tool quantified ground-glass opacity, reticulation, hyperlucent lung and pulmonary vessel volume; segmentation successful in 93% of cases; tool not previously trained on transplant cohort
+- **Reported outcomes in study**: Phenotype discrimination (AUC), graft failure prediction (hazard ratios)
+- **Outcomes Notes**: Both machine learning and radiologist scores predicted graft failure; PVV had highest AUC (0.85) for RAS/mixed phenotype and HR 1.23 for graft failure
+- **Result data Notes**: Focus on PVV as strongest diagnostic and prognostic biomarker; ROC analysis provided AUC values for multiple textures
+- **Primary Outcome Reported name**: Graft failure (death or re‑transplantation)
+- **Primary Outcome type**: Survival (time‑to‑event)
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Hazard ratio
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All CLAD patients (n=88)
+- **Primary Outcome Reporting**: HR 1.23, 95% CI 1.05–1.44; p=0.01
+- **Primary Outcome Point Estimate**: 1.23
+- **Primary Outcome 95 CI Lower**: 1.05
+- **Primary Outcome 95 CI Upper**: 1.44
+- **Primary Outcome p-value**: 0.01
+- **Primary Outcome Test Set Size**: 88
+- **Primary Outcome Threshold**: PVV cut‑point 3% (sensitivity 90%, specificity 70.1%)
+- **Primary Outcome Metric Definition**: Hazard ratio for graft failure per unit increase in pulmonary vessel volume proportion
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: PVV was the strongest independent predictor of graft failure, independent of CLAD phenotype
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

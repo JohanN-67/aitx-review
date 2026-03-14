@@ -1,0 +1,99 @@
+# Data Extraction Report: Mardini et al. - 2024 - An explainable machine learning approach using contemporary UNOS data to identify patients who fail
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult heart transplant candidates using a non‑linear machine learning model (XGBoost) to predict waitlist failure, includes relevant outcomes and is a peer‑reviewed article published after 2018.
+
+## Identification & Methods
+- **Sponsorship source**: National Institutes of Health (NIH) via UL1TR001427 award
+- **Country**: USA
+- **Setting**: NR
+- **Comments**: Retrospective analysis of UNOS registry data to develop and validate an explainable ML model predicting failure of status 2 bridge to heart transplantation.
+- **Author_name**: Mamoun T. Mardini
+- **Institution**: University of Florida, Department of Health Outcomes and Biomedical Informatics, Gainesville, FL, United States
+- **Email**: malmardini@uﬂ.edu
+- **Address**: Gainesville, FL, United States
+- **Country of Data Origin**: USA
+- **Dataset Source**: UNOS registry database
+- **Organ Focus**: Heart
+- **Study Period End**: 2022
+- **Study Period Start**: 2018
+- **Identification Notes**: Included adult heart transplant candidates listed as UNOS Status 2 and supported with Impella (5.0 or 5.5) or intra‑aortic balloon pump between 2018 and 2022.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: eXtreme Gradient Boosting (XGBoost)
+- **Class Imbalance**: Addressed using SMOTE, under‑sampling and class weighting; best approach selected per model.
+- **Comparator**: NR
+- **Input Variables**: 19 UNOS variables including demographics, BMI, height, race, smoking history, blood group, device type, implanted defibrillator, mechanical ventilation, dialysis, multiorgan transplant, hemodynamics (PAPi, etc.), biochemistry (creatinine, sodium, etc.), medications and UNOS region.
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Evaluated mean, median, K‑nearest neighbor, and XGBoost built‑in imputation; selected optimal method per model.
+- **Validation Method**: 5 × 5 nested cross‑validation (outer and inner folds).
+- **Methods Notes**: Hyperparameter tuning via grid search; model interpretation using SHAP values; internal validation with nested CV; performance metrics reported include AUC, accuracy, sensitivity, specificity.
+
+## Population Characteristics
+- **Inclusion criteria**: Heart transplant candidates listed as UNOS Status 2 between 2018 and 2022 and supported with Impella (5.0 or 5.5) or intra-aortic balloon pump
+- **Exclusion criteria**: UNOS region 6 excluded due to <150 patients
+- **Sample Size Total**: 4178
+- **Target Population**: Patients listed as Status 2 awaiting heart transplantation (bridge to transplant)
+- **Population Notes**: Cohort includes all UNOS regions except region 6; data derived from contemporary UNOS registry (2018‑2022)
+- **Recipient Mean Age**: NR
+- **Recipient Mean Age Overall**: NR
+- **Recipient Female Sex Pct**: NR
+- **Recipient Female Sex Pct Overall**: NR
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: NR
+- **Diagnosis Overall**: NR
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: XGBoost
+- **Intervention Input Data Modality**: UNOS registry clinical variables (demographic, hemodynamic, biochemical, device and treatment features)
+- **Number of Predictors**: 19 variables
+- **Feature Selection Method**: Variables selected based on statistical significance and removal of highly correlated features
+- **Temporal Handling**: Static baseline data at time of listing
+- **Interventions Notes**: XGBoost models built with nested 5×5 cross‑validation, grid search hyperparameter tuning, evaluation of multiple imputation and class‑imbalance strategies
+- **Reported outcomes in study**: Primary outcome: failure of UNOS Status 2 listing (death, too sick, inactive status 7 or upgrade to status 1); model performance metrics AUC, accuracy, balanced accuracy, sensitivity, specificity
+- **Outcomes Notes**: Failure defined as death while on waitlist, being too sick for transplant, inactive status 7 or upgrade to status 1
+- **Result data Notes**: Comprehensive model AUC 0.71 ± 0.03 (range across regions 0.44–0.74), specificity 0.75–0.96, accuracy 0.69–0.90
+- **Primary Outcome Reported name**: Status 2 failure
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All UNOS Status 2 heart transplant candidates supported with IABP or Impella (n=4,178)
+- **Primary Outcome Reporting**: AUC 0.71 ± 0.03
+- **Primary Outcome Point Estimate**: 0.71
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: NR
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: AUC calculated on independent test folds of a 5×5 nested cross‑validation
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Model shows high specificity but limited sensitivity for predicting failure during Status 2 period
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

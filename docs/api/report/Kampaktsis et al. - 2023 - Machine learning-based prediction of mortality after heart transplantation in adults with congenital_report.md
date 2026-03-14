@@ -1,0 +1,99 @@
+# Data Extraction Report: Kampaktsis et al. - 2023 - Machine learning-based prediction of mortality after heart transplantation in adults with congenital
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult heart transplant recipients using a CatBoost machine learning model to predict post‑transplant mortality, meeting all population, AI, outcome, and publication criteria.
+
+## Identification & Methods
+- **Sponsorship source**: NR
+- **Country**: USA
+- **Setting**: NR
+- **Comments**: Retrospective analysis of UNOS database focusing on adult congenital heart disease patients undergoing heart transplantation.
+- **Author_name**: Polydoros N. Kampaktsis
+- **Institution**: Columbia University Irving Medical Center
+- **Email**: pkampaktsis@yahoo.com
+- **Address**: 177 Fort Washington Avenue, MHB2, New York, NY 10032, USA
+- **Country of Data Origin**: USA
+- **Dataset Source**: United Network for Organ Sharing (UNOS) database
+- **Organ Focus**: Heart
+- **Study Period End**: 2020
+- **Study Period Start**: 2000
+- **Identification Notes**: Included adult ACHD patients who underwent isolated heart transplantation; excluded non‑adults, prior transplants, multi‑organ transplants, and those with <1 year follow‑up; variables with >10% missing values were not analyzed.
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: CatBoost gradient‑boosting decision tree model
+- **Class Imbalance**: Random oversampling applied to balance outcome classes in training set
+- **Comparator**: NR
+- **Input Variables**: Recipient, donor, procedural and post‑transplant characteristics (49 variables initially, 10 selected via SHAP)
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Variables with >10% missing values excluded; no imputation performed
+- **Validation Method**: Random split into derivation (70%) and validation (30%) cohorts; internal validation on held‑out set
+- **Methods Notes**: Feature selection using SHAP; oversampling for class imbalance; performance assessed with AUC, accuracy, sensitivity, specificity; SHAP used for explainability and individual risk assessment
+
+## Population Characteristics
+- **Inclusion criteria**: Adult ACHD patients who underwent isolated heart transplantation in the UNOS database from 2000 to 2020
+- **Exclusion criteria**: Non-adult patients, prior transplantation, simultaneous heart and other organ transplants, less than 1-year follow-up
+- **Sample Size Total**: 1033
+- **Target Population**: Adult congenital heart disease heart transplant recipients
+- **Population Notes**: Cohort randomly split into derivation (70%) and validation (30%) datasets
+- **Recipient Mean Age**: 34
+- **Recipient Mean Age Overall**: 34
+- **Recipient Female Sex Pct**: 38.9
+- **Recipient Female Sex Pct Overall**: 38.9
+- **Mean BMI**: NR
+- **Mean BMI Overall**: NR
+- **Diagnosis**: Adult congenital heart disease (ACHD)
+- **Diagnosis Overall**: Adult congenital heart disease (ACHD)
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: NR
+- **Pre-transplant Support Overall**: NR
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: NR
+- **Donor Mean Age Overall**: NR
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: CatBoost
+- **Intervention Input Data Modality**: UNOS registry tabular clinical variables (recipient, donor, procedural, post-transplant characteristics)
+- **Number of Predictors**: 10 selected variables
+- **Feature Selection Method**: SHAP (recursive feature elimination using SHapley Additive exPlanations)
+- **Temporal Handling**: Static baseline and early post-transplant data
+- **Interventions Notes**: Random split 70% training / 30% validation, random oversampling of minority class, CatBoost model trained on selected variables
+- **Reported outcomes in study**: 1-year mortality, 3-year mortality
+- **Outcomes Notes**: Mortality after heart transplantation in adults with congenital heart disease
+- **Result data Notes**: AUC .80 for 1-year model, .69 for 3-year model; predictive accuracies 75.2% and 74.2% respectively
+- **Primary Outcome Reported name**: 1-year mortality
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All adult ACHD heart transplant recipients (n=1033) in validation cohort
+- **Primary Outcome Reporting**: AUC 0.80 (95% CI 0.687-0.811), accuracy 75.2%
+- **Primary Outcome Point Estimate**: 0.80
+- **Primary Outcome 95 CI Lower**: 0.687
+- **Primary Outcome 95 CI Upper**: 0.811
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: NR
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Area under the receiver operating characteristic curve on validation cohort
+- **Primary Outcome Timepoints**: 1 year post-transplant
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: 1 year
+- **Primary Outcome Late Reported time**: 3 years
+- **Primary Outcome Notes**: Satisfactory predictive accuracy of mortality prediction
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: 0.80
+- **Res_Primary 1Yr Accuracy**: 75.2%
+- **Res_Primary 1Yr Sens_Spec**: Sens 75%, Spec 75%
+- **Res_Primary Late AUC**: 0.69
+- **Res_Primary Late Accuracy**: 74.2%
+- **Res_Primary Late Sens_Spec**: Sens 51%, Spec 85%

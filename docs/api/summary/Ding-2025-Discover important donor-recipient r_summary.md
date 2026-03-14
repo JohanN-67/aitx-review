@@ -1,0 +1,9 @@
+**Core Objective:** Develop a machine‑learning model to predict early primary graft dysfunction (PGD) after heart transplantation and identify salient donor–recipient risk factors and interactions.
+
+**Patient Cohort & Study Scope:** 8,008 heart transplant recipients from the United Network for Organ Sharing (UNOS) database; mean/median age not reported (age range not specified); transplants performed across unspecified years (data extracted from UNOS, likely up to 2024). Only heart transplants were included.
+
+**AI/ML Approach:** Compared five models—Logistic Regression, Support Vector Machine, Gradient Boosted Decision Trees (GBDT), Decision Tree, LightGBM, and a Multi‑Layer Perceptron (MLP). Input comprised 66 tabular features covering donor and recipient demographics, clinical labs, hemodynamics, and engineered donor–recipient pair variables. Missing values imputed with k‑NN; categorical variables one‑hot encoded.
+
+**Key Findings:** The MLP achieved the highest performance: AUROC = 0.868 ± 0.006 and AUPRC = 0.794 ± 0.015 (5‑fold cross‑validation). Other models: LightGBM AUROC = 0.807, GBDT = 0.801, Decision Tree AUROC = 0.756, Logistic Regression AUROC = 0.731, SVM AUROC = 0.525. Top predictive features included donor‑recipient distance, donor age, recipient weight, donor weight, and recipient age; novel risk factors such as hemodynamic parameters (HEMO_PA_MN_TCR) and BMI were also highlighted. The model uncovered 20 high‑ranking donor–recipient feature interactions.
+
+**Main Limitations:** Retrospective single‑center (UNOS) dataset with potential selection bias and limited feature modalities; no external validation.

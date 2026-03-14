@@ -1,0 +1,99 @@
+# Data Extraction Report: Singh et al. - 2024 - CT-Based Lung Size Matching in Delayed Chest Closure for Systemic Sclerosis Lung Transplantation
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The retrospective study of adult lung transplant recipients uses deep learning CNNs (a non‑linear AI model) to predict delayed chest closure and reports survival and complication outcomes, and it is a peer‑reviewed article published after 2018.
+
+## Identification & Methods
+- **Sponsorship source**: National Institutes of Health (NIH) research grants R01HL174570 and R01CA237277, UPMC Hillman Developmental Pilot Program
+- **Country**: USA
+- **Setting**: Single-center study at University of Pittsburgh Medical Center, tertiary academic center
+- **Comments**: Retrospective cohort study of 92 systemic sclerosis lung transplant recipients evaluating delayed chest closure
+- **Author_name**: Jatin Singh
+- **Institution**: University of Pittsburgh School of Medicine
+- **Email**: jip13@pitt.edu
+- **Address**: Pittsburgh, Pennsylvania, USA
+- **Country of Data Origin**: USA
+- **Dataset Source**: University of Pittsburgh Medical Center electronic medical records and pre‑transplant chest CT scans
+- **Organ Focus**: Lung
+- **Study Period End**: 2020
+- **Study Period Start**: 2007
+- **Identification Notes**: Included adult systemic sclerosis patients who underwent bilateral lung transplantation at UPMC between 2007‑2020 (n=92)
+- **Design**: Retrospective Cohort
+- **AI Model Architecture**: 3‑D Convolutional Neural Network (Unet) for CT segmentation; multivariate logistic regression model for DCC prediction
+- **Class Imbalance**: NR
+- **Comparator**: Primary chest closure (PCC)
+- **Input Variables**: Pre‑operative clinical variables (e.g., BMI, tracheostomy, atrial fibrillation, FEV1/FVC, prior chest operation) and CT‑derived lung and chest cavity volumes
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Variables with <5% missing imputed using mean or mode; variables with >5% missing excluded
+- **Validation Method**: Stratified 5‑fold cross‑validation with grid‑search hyperparameter tuning
+- **Methods Notes**: Backward stepwise logistic regression, L2 regularization (penalty=0.1), liblinear solver; model achieved mean AUC 0.82
+
+## Population Characteristics
+- **Inclusion criteria**: Systemic sclerosis recipients who underwent bilateral lung transplantation between 2007 and 2020
+- **Exclusion criteria**: NR
+- **Sample Size Total**: 92
+- **Target Population**: SSc recipients
+- **Population Notes**: Retrospective single-center study of 92 bilateral lung transplant recipients with systemic sclerosis
+- **Recipient Mean Age**: 51
+- **Recipient Mean Age Overall**: 51
+- **Recipient Female Sex Pct**: 61.0
+- **Recipient Female Sex Pct Overall**: 61.0
+- **Mean BMI**: 25.1
+- **Mean BMI Overall**: 25.1
+- **Diagnosis**: Systemic sclerosis with interstitial lung disease or pulmonary arterial hypertension
+- **Diagnosis Overall**: Systemic sclerosis with interstitial lung disease or pulmonary arterial hypertension
+- **Diabetes Pct**: NR
+- **Diabetes Pct Overall**: NR
+- **Pre-transplant Support**: BMI >30 kg/m2, tracheostomy, atrial fibrillation, decreased preoperative FEV1/FVC, previous chest operation
+- **Pre-transplant Support Overall**: BMI >30 kg/m2, tracheostomy, atrial fibrillation, decreased preoperative FEV1/FVC, previous chest operation
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: 35
+- **Donor Mean Age Overall**: 35
+- **Ischemic Time**: NR
+- **Ischemic Time Overall**: NR
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: 3D Unet convolutional neural network for lung and chest cavity segmentation; multivariate logistic regression model
+- **Intervention Input Data Modality**: Preoperative non-contrast chest CT images and clinical variables
+- **Number of Predictors**: NR
+- **Feature Selection Method**: Backward stepwise elimination (p‑value cutoff 0.05) for logistic regression
+- **Temporal Handling**: Static baseline pre‑operative data
+- **Interventions Notes**: CT images automatically segmented using deep learning; logistic regression trained with stratified 5‑fold cross‑validation and grid‑search hyperparameter tuning
+- **Reported outcomes in study**: 30‑day, 90‑day, 1‑year and 5‑year survival; postoperative complications (ventilator duration, ICU length of stay, pneumonia); prediction performance for DCC occurrence
+- **Outcomes Notes**: DCC recipients had similar survival to PCC but more postoperative complications; model predicted DCC with good discrimination
+- **Result data Notes**: Multivariate logistic regression achieved mean AUC 0.82 (95% CI 0.70–0.94) in predicting DCC occurrence
+- **Primary Outcome Reported name**: DCC occurrence prediction
+- **Primary Outcome type**: Classification
+- **Primary Outcome Reported against**: NR
+- **Primary Outcome Reported as**: Area under the ROC curve (AUC)
+- **Primary Outcome Reference arm**: NR
+- **Primary Outcome group**: All systemic sclerosis lung transplant recipients (n=92)
+- **Primary Outcome Reporting**: AUC 0.82 (95% CI 0.70–0.94)
+- **Primary Outcome Point Estimate**: 0.82
+- **Primary Outcome 95 CI Lower**: 0.70
+- **Primary Outcome 95 CI Upper**: 0.94
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: 92
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: AUC from 5‑fold cross‑validation evaluating model discrimination for DCC occurrence
+- **Primary Outcome Timepoints**: NR
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: NR
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Model accurately differentiated recipients who would undergo DCC versus primary chest closure
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: NR
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR

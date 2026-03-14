@@ -1,0 +1,99 @@
+# Data Extraction Report: Liou et al. - 2025 - Survival machine learning methods for mortality prediction after heart transplantation in the contem
+---
+## Metadata
+- **Form**: Data Extraction
+- **Reviewer**: Extractor Script V2
+- **Status**: Complete
+
+## Eligibility
+- **Eligibility Status**: Accepted
+- **Eligibility Rationale**: The study analyzes adult heart transplant recipients using machine learning survival algorithms (non‑linear models) to predict one‑year mortality, published in a peer‑reviewed journal after 2018, meeting all inclusion criteria.
+
+## Identification & Methods
+- **Sponsorship source**: No specific funding
+- **Country**: USA
+- **Setting**: National registry (Scientific Registry of Transplant Recipients) study
+- **Comments**: Retrospective benchmark study using SRTR data to evaluate survival ML methods for heart transplantation mortality.
+- **Author_name**: Lathan Liou
+- **Institution**: Harvard T.H. Chan School of Public Health
+- **Email**: mmittlem@hsph.harvard.edu
+- **Address**: Boston, Massachusetts, United States
+- **Country of Data Origin**: USA
+- **Dataset Source**: Scientific Registry of Transplant Recipients (SRTR)
+- **Organ Focus**: Heart
+- **Study Period End**: June 3, 2021
+- **Study Period Start**: November 1, 2014
+- **Identification Notes**: Included adult (≥18 years) heart-only transplant recipients receiving first transplant; excluded multi-organ transplants and those <18 years.
+- **Design**: Retrospective cohort benchmark study
+- **AI Model Architecture**: Lasso, Ridge, Elastic Net (penalized Cox), Cox Gradient Boost, XGBoost Linear, XGBoost Tree, Random Survival Forests
+- **Class Imbalance**: NR
+- **Comparator**: Cox proportional hazards model
+- **Input Variables**: 75 demographic, clinical, recipient, waitlist, donor and procedural variables (114 after one‑hot encoding)
+- **ML Primary Component**: Yes
+- **Missing Data Handling**: Multiple imputation with chained equations (MICE) for variables <20% missing; excluded >20% missingness
+- **Validation Method**: Nested 5‑repeat, 5‑fold cross‑validation with 90/10 train‑holdout split; hyperparameter tuning via random search (25 iterations); external validation on seasonally matched pre‑policy cohort
+- **Methods Notes**: Data standardized (z‑score), one‑hot encoded; models built using mlr package in R; Bonferroni adjustment applied to p‑values; code available on GitHub
+
+## Population Characteristics
+- **Inclusion criteria**: Adult heart-only transplant recipients who received their first transplant on or after October 18, 2018
+- **Exclusion criteria**: Recipients <18 years of age at transplant and multi-organ transplants
+- **Sample Size Total**: 7160
+- **Target Population**: Heart transplant recipients
+- **Population Notes**: Post-policy cohort of 7,160 adult heart-only transplant recipients with at least one recorded follow-up; also a seasonally-matched pre-policy cohort used for comparison
+- **Recipient Mean Age**: 53.5
+- **Recipient Mean Age Overall**: 53.5
+- **Recipient Female Sex Pct**: 27.5
+- **Recipient Female Sex Pct Overall**: 27.5
+- **Mean BMI**: 27.8
+- **Mean BMI Overall**: 27.8
+- **Diagnosis**: Various cardiac etiologies; most common idiopathic (37.7%)
+- **Diagnosis Overall**: Various cardiac etiologies; most common idiopathic (37.7%)
+- **Diabetes Pct**: 27.1
+- **Diabetes Pct Overall**: 27.1
+- **Pre-transplant Support**: VAD 37.6%, ECMO 4.9%, IABP 26.8%
+- **Pre-transplant Support Overall**: VAD 37.6%, ECMO 4.9%, IABP 26.8%
+- **Mean Creatinine**: NR
+- **Mean Creatinine Overall**: NR
+- **Donor Mean Age**: 32.5
+- **Donor Mean Age Overall**: 32.5
+- **Ischemic Time**: 206 min (≈3.4 hours)
+- **Ischemic Time Overall**: 206 min (≈3.4 hours)
+
+## Interventions & Outcomes
+- **Specific Algorithm Name**: Lasso, Ridge, Elastic Net, Cox Gradient Boost, XGBoost Linear, XGBoost Tree, Random Survival Forests
+- **Intervention Input Data Modality**: SRTR registry data (demographic, clinical, recipient, waitlist, donor, procedural variables)
+- **Number of Predictors**: 75 variables (114 after one‑hot encoding)
+- **Feature Selection Method**: Multiple imputation, z-score standardization, one‑hot encoding; no pre‑selection before model training
+- **Temporal Handling**: Time-to-event survival analysis with censoring at 1 year
+- **Interventions Notes**: Nested 5‑repeat, 5‑fold cross‑validation; random search hyperparameter tuning; models trained on training set and evaluated on holdout set
+- **Reported outcomes in study**: 1-year all-cause mortality
+- **Outcomes Notes**: Performance evaluated using concordance index (C‑index)
+- **Result data Notes**: Holdout C‑indices reported for each model; best was Random Survival Forests (C‑index 0.628)
+- **Primary Outcome Reported name**: 1-year all-cause mortality
+- **Primary Outcome type**: Survival (time‑to‑event)
+- **Primary Outcome Reported against**: Cox proportional hazards model
+- **Primary Outcome Reported as**: Concordance index (C‑index)
+- **Primary Outcome Reference arm**: Cox PH C-index 0.585 (post‑policy holdout)
+- **Primary Outcome group**: Adult heart‑only transplant recipients post‑policy (n=7,160)
+- **Primary Outcome Reporting**: C-index 0.628 for Random Survival Forests (best model)
+- **Primary Outcome Point Estimate**: 0.628
+- **Primary Outcome 95 CI Lower**: NR
+- **Primary Outcome 95 CI Upper**: NR
+- **Primary Outcome p-value**: NR
+- **Primary Outcome Test Set Size**: Approximately 716 (10% holdout of 7,160)
+- **Primary Outcome Threshold**: NR
+- **Primary Outcome Metric Definition**: Proportion of concordant pairs in survival predictions (Harrell's C‑index)
+- **Primary Outcome Timepoints**: 1 year post‑transplant
+- **Primary Outcome In-Hospital Reported time**: NR
+- **Primary Outcome 1-Year Reported time**: 1 year
+- **Primary Outcome Late Reported time**: NR
+- **Primary Outcome Notes**: Machine learning models provided reasonable prediction of 1‑year mortality but were not statistically superior to Cox model
+- **Res_Primary InHosp AUC**: NR
+- **Res_Primary InHosp Accuracy**: NR
+- **Res_Primary InHosp Sens_Spec**: NR
+- **Res_Primary 1Yr AUC**: 0.628
+- **Res_Primary 1Yr Accuracy**: NR
+- **Res_Primary 1Yr Sens_Spec**: NR
+- **Res_Primary Late AUC**: NR
+- **Res_Primary Late Accuracy**: NR
+- **Res_Primary Late Sens_Spec**: NR
